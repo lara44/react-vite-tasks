@@ -2,6 +2,24 @@ import { useState } from 'react';
 function TaskContainer() {
   const [task, setTask] = useState({ id: '', description: '' });
   const [listTasks, setListTasks] = useState([{ id: '', description: '' }]);
+  const [errorTask, setErrorTask] = useState(false);
+  const [errorTaskMessages, setErrorTaskMessages] = useState<string[]>([]);
+
+  const validateTask = () => {
+    setErrorTask(false);
+    setErrorTaskMessages([]);
+    if (!task.description) setErrorTaskMessages(['Entry description task*']);
+    if (errorTaskMessages.length > 0) setErrorTask(true);
+    return errorTask;
+  };
+
+  const addTask = () => {
+    if (validateTask()) {
+      return;
+    }
+
+    alert('OK');
+  };
 
   return (
     <>
@@ -67,7 +85,18 @@ function TaskContainer() {
               </button>
             </div>
             <div className="modal-body">
-              <input type="text" className="form-control" placeholder="Entry descripton task*" value={task.description}/>
+              <input
+                type="text"
+                className="form-control"
+                placeholder="Entry descripton task*"
+                value={task.description}
+              />
+              <pre>{task.description}</pre>
+              <div style={{ color: 'red', textAlign: 'center' }}>
+                {errorTaskMessages.map((error, index) => (
+                  <span key={index}>{error}</span>
+                ))}
+              </div>
             </div>
             <div className="modal-footer">
               <button
@@ -77,7 +106,13 @@ function TaskContainer() {
               >
                 Close
               </button>
-              <button type="button" className="btn btn-primary">
+              <button
+                type="button"
+                className="btn btn-primary"
+                onClick={() => {
+                  addTask();
+                }}
+              >
                 Save Task
               </button>
             </div>
