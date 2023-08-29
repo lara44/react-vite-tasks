@@ -1,15 +1,23 @@
 import { useState } from 'react';
+
 function TaskContainer() {
-  const [task, setTask] = useState({ id: '', description: '' });
-  const [listTasks, setListTasks] = useState([{ id: '', description: '' }]);
-  const [errorTask, setErrorTask] = useState(false);
+  interface Task {
+    id: number;
+    description: string;
+  }
+
+  const [listTasks, setListTasks] = useState<Task[]>([]);
+  const [descriptionTask, setDescriptionTask] = useState<string>('');
   const [errorTaskMessages, setErrorTaskMessages] = useState<string[]>([]);
 
   const validateTask = () => {
-    setErrorTask(false);
+    let errorTask = false;
     setErrorTaskMessages([]);
-    if (!task.description) setErrorTaskMessages(['Entry description task*']);
-    if (errorTaskMessages.length > 0) setErrorTask(true);
+    if (!descriptionTask) {
+      setErrorTaskMessages(['Entry description task*']);
+      errorTask = true;
+    }
+
     return errorTask;
   };
 
@@ -18,13 +26,14 @@ function TaskContainer() {
       return;
     }
 
-    alert('OK');
+    setListTasks([...listTasks, { id: 1, description: descriptionTask }]);
+    setDescriptionTask('');
   };
 
   return (
     <>
       <div className="container mt-5">
-        <h1 className="text-center">Taks in React</h1>
+        <h4 className="text-center">Taks in React</h4>
         <div className="row">
           <div className="col-md-4">
             <button
@@ -47,17 +56,14 @@ function TaskContainer() {
                 </tr>
               </thead>
               <tbody>
-                {listTasks.map((tak) => (
-                  <tr>
-                    <td>{tak.id}</td>
-                    <td>{tak.description}</td>
+                {listTasks.map((task, index) => (
+                  <tr key={index}>
+                    <td>{task.id}</td>
+                    <td>{task.description}</td>
                   </tr>
                 ))}
               </tbody>
             </table>
-          </div>
-          <div className="col-md-4">
-            <h3>Form Taks</h3>
           </div>
         </div>
       </div>
@@ -89,9 +95,11 @@ function TaskContainer() {
                 type="text"
                 className="form-control"
                 placeholder="Entry descripton task*"
-                value={task.description}
+                value={descriptionTask}
+                onChange={(text) => setDescriptionTask(text.target.value)}
               />
-              <pre>{task.description}</pre>
+              <pre>{descriptionTask}</pre>
+              <pre>{errorTaskMessages}</pre>
               <div style={{ color: 'red', textAlign: 'center' }}>
                 {errorTaskMessages.map((error, index) => (
                   <span key={index}>{error}</span>
