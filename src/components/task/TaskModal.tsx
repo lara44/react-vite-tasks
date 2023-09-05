@@ -12,9 +12,9 @@ function TaskModal() {
         <div className="modal-dialog modal-dialog-centered" role="document">
           <div className="modal-content">
             <div className="modal-header">
-              <h5 className="modal-title" id="exampleModalLongTitle">
+              <h4 className="modal-title" id="exampleModalLongTitle">
                 Component Add New Task
-              </h5>
+              </h4>
               <button
                 type="button"
                 className="close"
@@ -28,12 +28,12 @@ function TaskModal() {
             <div className="modal-footer">
               <button
                 type="button"
-                className="btn btn-secondary"
+                className="btn btn-secondary btn-sm"
                 data-dismiss="modal"
               >
                 Close
               </button>
-              <button type="button" className="btn btn-primary">
+              <button type="button" className="btn btn-primary btn-sm">
                 Save Task
               </button>
             </div>

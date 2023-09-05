@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import { Link } from 'react-router-dom';
 
 function TaskContainer() {
   interface Task {
@@ -36,9 +37,11 @@ function TaskContainer() {
         <h4 className="text-center">Taks in React</h4>
         <div className="row">
           <div className="col-md-4">
+          
+            <Link to="/" className="btn btn-info btn-sm m-1">Return</Link>
             <button
               type="button"
-              className="btn btn-primary"
+              className="btn btn-primary btn-sm m-1"
               data-toggle="modal"
               data-target="#exampleModalCenter"
             >
@@ -48,7 +51,7 @@ function TaskContainer() {
         </div>
         <div className="row">
           <div className="col-md-8">
-            <table className="table">
+            <table className="table table-sm">
               <thead>
                 <tr>
                   <th>Id</th>
@@ -109,14 +112,14 @@ function TaskContainer() {
             <div className="modal-footer">
               <button
                 type="button"
-                className="btn btn-secondary"
+                className="btn btn-secondary btn-sm"
                 data-dismiss="modal"
               >
                 Close
               </button>
               <button
                 type="button"
-                className="btn btn-primary"
+                className="btn btn-primary btn-sm"
                 onClick={() => {
                   addTask();
                 }}

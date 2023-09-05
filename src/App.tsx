@@ -1,10 +1,11 @@
 
-import TaskContainer from './components/task/TaskContainer'
+import AppRouter from './routers/AppRouter';
+import './App.css'
 
 function App() {
   return (
     <>
-        <TaskContainer/>
+        <AppRouter/>
     </>
   )
 }
