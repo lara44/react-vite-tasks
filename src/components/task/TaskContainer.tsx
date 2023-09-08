@@ -12,14 +12,18 @@ function TaskContainer() {
   const [errorTaskMessages, setErrorTaskMessages] = useState<string[]>([]);
 
   const validateTask = () => {
-    let errorTask = false;
-    setErrorTaskMessages([]);
-    if (!descriptionTask) {
-      setErrorTaskMessages(['Entry description task*']);
-      errorTask = true;
-    }
+    setErrorTaskMessages(() => []);
 
-    return errorTask;
+    let error: boolean = false;
+    let errorTask: string[] = [];
+
+    if (!descriptionTask) {
+      errorTask.push('Entry description task*');
+    }
+    if (errorTask.length > 0) error = true;
+
+    setErrorTaskMessages(errorTask);
+    return error;
   };
 
   const addTask = () => {
@@ -27,8 +31,8 @@ function TaskContainer() {
       return;
     }
 
-    setListTasks([...listTasks, { id: 1, description: descriptionTask }]);
-    setDescriptionTask('');
+    setListTasks(() => [...listTasks, { id: 1, description: descriptionTask }]);
+    setDescriptionTask(() => '');
   };
 
   return (
@@ -37,8 +41,9 @@ function TaskContainer() {
         <h4 className="text-center">Taks in React</h4>
         <div className="row">
           <div className="col-md-4">
-          
-            <Link to="/" className="btn btn-info btn-sm m-1">Return</Link>
+            <Link to="/" className="btn btn-info btn-sm m-1">
+              Return
+            </Link>
             <button
               type="button"
               className="btn btn-primary btn-sm m-1"
