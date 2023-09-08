@@ -106,8 +106,6 @@ function TaskContainer() {
                 value={descriptionTask}
                 onChange={(text) => setDescriptionTask(text.target.value)}
               />
-              <pre>{descriptionTask}</pre>
-              <pre>{errorTaskMessages}</pre>
               <div style={{ color: 'red', textAlign: 'center' }}>
                 {errorTaskMessages.map((error, index) => (
                   <span key={index}>{error}</span>
